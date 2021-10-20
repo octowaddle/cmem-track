@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 struct cmt_allocation {
+    const char *argument;
     const char *file;
     const char *function;
     const char *method;
@@ -13,6 +14,7 @@ struct cmt_allocation {
 };
 
 struct cmt_allocation *cmt_allocation_create(
+    const char *argument,
     const char *file,
     const char *function,
     const char *method,

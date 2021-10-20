@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 struct cmt_allocation *cmt_allocation_create(
+    const char *argument,
     const char *file,
     const char *function,
     const char *method,
@@ -13,7 +14,9 @@ struct cmt_allocation *cmt_allocation_create(
     void *address
 ) {
     struct cmt_allocation *allocation = malloc(sizeof *allocation);
+
     if (allocation) {
+        allocation->argument = argument;
         allocation->file = file;
         allocation->function = function;
         allocation->method = method;
@@ -35,7 +38,8 @@ void cmt_allocation_delete(struct cmt_allocation **allocation) {
 void cmt_allocation_print(struct cmt_allocation *allocation) {
     assert(allocation != NULL);
     printf(
-        "allocation { file: %s, function: %s, method: %s, line: %lu, size: %lu, address: %p }\n",
+        "allocation { argument: \"%s\", file: \"%s\", function: \"%s\", method: \"%s\", line: %lu, size: %lu, address: %p }\n",
+        allocation->argument,
         allocation->file,
         allocation->function,
         allocation->method,
